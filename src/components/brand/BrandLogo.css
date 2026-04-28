@@ -1,0 +1,57 @@
+/* ===== BrandLogo — ReadSpace brand mark ===== */
+
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+  user-select: none;
+}
+
+/* ── Wordmark ── */
+.brand-logo__wordmark {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.brand-logo__wordmark strong {
+  font-weight: 900;
+  color: var(--color-primary);
+  letter-spacing: -0.03em;
+}
+
+/* ── Sidebar variant (always dark background) ── */
+.brand-logo--sidebar .brand-logo__wordmark {
+  color: #f1f5f9;
+}
+
+.brand-logo--sidebar .brand-logo__wordmark strong {
+  color: #93c5fd;
+}
+
+/* ── Size sm ── */
+.brand-logo--sm .brand-logo__wordmark {
+  font-size: 0.92rem;
+}
+
+/* ── Size md ── */
+.brand-logo--md .brand-logo__wordmark {
+  font-size: 1.1rem;
+}
+
+/* ── Size lg — hero / auth card ── */
+.brand-logo--lg .brand-logo__wordmark {
+  font-size: 1.5rem;
+}
+
+/* ── Dark theme auto variant ── */
+[data-theme="dark"] .brand-logo:not(.brand-logo--sidebar) .brand-logo__wordmark {
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .brand-logo:not(.brand-logo--sidebar) .brand-logo__wordmark strong {
+  color: var(--color-primary);
+}

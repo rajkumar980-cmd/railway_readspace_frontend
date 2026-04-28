@@ -1,0 +1,179 @@
+/* ===================================================
+   ui.css — Shared UI primitives (Select, etc.)
+   Used by src/components/ui/Select.jsx
+   =================================================== */
+
+/* ── Select root ── */
+.ui-select {
+  position: relative;
+  display: inline-block;
+}
+
+/* ── Trigger button ── */
+.ui-select__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-2);
+  color: var(--color-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 0.45rem 0.75rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    border-color 150ms ease,
+    background   150ms ease,
+    box-shadow   150ms ease;
+  outline: none;
+  user-select: none;
+  width: 100%;
+  justify-content: space-between;
+}
+.ui-select__trigger:hover {
+  border-color: var(--color-primary);
+  background: var(--color-surface);
+}
+.ui-select__trigger:focus-visible {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.15);
+}
+.ui-select--open .ui-select__trigger {
+  border-color: var(--color-primary);
+  background: var(--color-surface);
+  box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.12);
+}
+
+/* ── Small size ── */
+.ui-select--sm .ui-select__trigger {
+  font-size: 0.78rem;
+  padding: 0.28rem 0.55rem;
+  gap: 0.3rem;
+}
+
+/* ── Compact pill style (date-range usage) ── */
+.ui-select--compact .ui-select__trigger {
+  padding: 0.35rem 0.7rem 0.35rem 0.6rem;
+  font-size: 0.82rem;
+  border-radius: var(--radius-lg);
+}
+
+/* ── Lead icon ── */
+.ui-select__lead-icon {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+}
+
+/* ── Value label ── */
+.ui-select__value {
+  flex: 1;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Caret chevron ── */
+.ui-select__chevron {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+  transition: transform 200ms ease;
+}
+.ui-select--open .ui-select__chevron {
+  transform: rotate(180deg);
+}
+
+/* ── Dropdown menu ── */
+@keyframes selectOpen {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  @keyframes selectOpen { from { opacity: 0; } to { opacity: 1; } }
+}
+
+.ui-select__menu {
+  position: absolute;
+  left: 0;
+  min-width: 100%;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.3rem;
+  margin: 0;
+  list-style: none;
+  z-index: 1000;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.08),
+    0 10px 20px -4px rgba(0, 0, 0, 0.12);
+  animation: selectOpen 150ms ease both;
+  outline: none;
+}
+.ui-select__menu--down { top: calc(100% + 4px); }
+.ui-select__menu--up   { bottom: calc(100% + 4px); animation-name: selectOpenUp; }
+@keyframes selectOpenUp {
+  from { opacity: 0; transform: translateY(6px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)  scale(1); }
+}
+
+/* ── Menu options ── */
+.ui-select__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.7rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: var(--color-text);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  transition: background 100ms ease, color 100ms ease;
+}
+.ui-select__option:hover,
+.ui-select__option--focused {
+  background: var(--color-surface-2);
+  color: var(--color-text);
+}
+.ui-select__option--selected {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+.ui-select__option--selected.ui-select__option--focused,
+.ui-select__option--selected:hover {
+  background: rgba(26, 86, 219, 0.06);
+}
+
+/* ── Selected tick mark ── */
+.ui-select__tick {
+  font-size: 0.75rem;
+  color: var(--color-primary);
+  margin-left: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* ── sm option size ── */
+.ui-select--sm .ui-select__option {
+  padding: 0.35rem 0.55rem;
+  font-size: 0.8rem;
+}
+
+/* ── Dark mode menu shadow ── */
+[data-theme="dark"] .ui-select__menu {
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 10px 24px -4px rgba(0, 0, 0, 0.4);
+}
+[data-theme="dark"] .ui-select__trigger {
+  background: #1e293b;
+}
+[data-theme="dark"] .ui-select--open .ui-select__trigger,
+[data-theme="dark"] .ui-select__trigger:hover {
+  background: #263548;
+}
+[data-theme="dark"] .ui-select__option--selected {
+  background: rgba(59, 130, 246, 0.08);
+}

@@ -1,0 +1,5 @@
+/* Latest Page */
+.page-hero--green { background: linear-gradient(135deg, #065f46, #10b981); }
+.latest__highlights { padding: 2.5rem 0 1rem; }
+.latest__all { padding: 1rem 0 4rem; }
+.latest__all .section-title { margin-bottom: 1.5rem; }

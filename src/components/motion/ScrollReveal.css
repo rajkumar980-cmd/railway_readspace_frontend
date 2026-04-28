@@ -1,0 +1,35 @@
+/* ===== ScrollReveal Motion System ===== */
+
+/*
+  Default state: visible (for reduced-motion or SSR).
+  GPU-friendly transforms only: opacity + translateY.
+  No layout-triggering properties animated.
+*/
+
+@media (prefers-reduced-motion: no-preference) {
+  /* ── Fade up (default) ── */
+  .sr-reveal--fade-up {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 580ms ease-out, transform 580ms ease-out;
+    will-change: opacity, transform;
+  }
+
+  /* ── Fade in (no Y movement) ── */
+  .sr-reveal--fade-in {
+    opacity: 0;
+    transition: opacity 580ms ease-out;
+    will-change: opacity;
+  }
+
+  /* ── Revealed state (both variants) ── */
+  .sr-reveal--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Release will-change after animation */
+  .sr-reveal--visible {
+    will-change: auto;
+  }
+}

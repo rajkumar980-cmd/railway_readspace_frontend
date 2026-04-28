@@ -1,0 +1,562 @@
+/* ===== Rating Modal — FeedbackForm.css ===== */
+
+/* ── Overlay ──────────────────────────────────────────────────── */
+.rm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  background: rgba(8, 15, 35, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* ── Modal shell ──────────────────────────────────────────────── */
+.rm-modal {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 540px;
+  max-height: 88vh;
+  position: relative;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.22),
+    0 4px 16px rgba(0, 0, 0, 0.10);
+  outline: none;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scrollable inner */
+.rm-scroll {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 1.5rem;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+.rm-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.rm-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 9999px;
+}
+
+/* ── Close button ─────────────────────────────────────────────── */
+.rm-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface-2);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.rm-close:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: var(--color-danger);
+}
+
+.rm-close:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ── Resource header ──────────────────────────────────────────── */
+.rm-resource-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem 1.5rem 1.25rem;
+  padding-right: 3rem;
+  /* room for close btn */
+}
+
+.rm-resource-thumb-wrap {
+  flex-shrink: 0;
+}
+
+.rm-resource-thumb {
+  width: 76px;
+  height: 58px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.rm-resource-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.rm-resource-category {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: var(--radius-full);
+  padding: 0.15rem 0.6rem;
+  width: fit-content;
+  margin-bottom: 0.1rem;
+}
+
+.rm-resource-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--color-text);
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.rm-resource-author {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ── Average rating block ─────────────────────────────────────── */
+.rm-avg-block {
+  margin: 0 1.5rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg,
+      rgba(26, 86, 219, 0.07) 0%,
+      rgba(14, 165, 233, 0.05) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.18);
+  border-radius: var(--radius-lg);
+}
+
+[data-theme="dark"] .rm-avg-block {
+  background: linear-gradient(135deg,
+      rgba(96, 165, 250, 0.09) 0%,
+      rgba(56, 189, 248, 0.06) 100%);
+  border-color: rgba(96, 165, 250, 0.2);
+}
+
+.rm-avg-score {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.rm-avg-number {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+
+.rm-avg-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.rs-stars {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.rs-star {
+  color: var(--color-border);
+  line-height: 0;
+}
+
+.rs-star--filled {
+  color: var(--color-accent);
+}
+
+.rs-star--half {
+  color: var(--color-accent);
+  opacity: 0.55;
+}
+
+/* Interactive stars */
+.rs-stars--interactive {
+  gap: 0.05rem;
+}
+
+.rs-star-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 0.25rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-border);
+  cursor: pointer;
+  transition: color 0.16s ease, transform 0.16s ease;
+  line-height: 0;
+}
+
+.rs-star-btn--filled {
+  color: var(--color-accent);
+}
+
+.rs-star-btn:hover {
+  color: var(--color-accent);
+  transform: scale(1.22);
+}
+
+.rs-star-btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+.rm-avg-meta {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  margin: 0;
+}
+
+/* ── Divider ──────────────────────────────────────────────────── */
+.rm-divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 1.25rem 1.5rem;
+  opacity: 0.7;
+}
+
+/* ── Section heading ──────────────────────────────────────────── */
+.rm-section-heading {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-text-muted);
+  margin: 0 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.rm-reviews-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  min-width: 18px;
+  padding: 0 5px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-2);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* ── Form section ─────────────────────────────────────────────── */
+.rm-form-section {
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.rm-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.rm-form-label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.rm-required {
+  color: var(--color-danger);
+  margin-left: 2px;
+}
+
+.rm-star-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.rm-rating-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.rm-field-error {
+  font-size: 0.78rem;
+  color: var(--color-danger);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Textarea */
+.rm-textarea {
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.9rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--color-text);
+  background: var(--color-surface);
+  resize: vertical;
+  min-height: 108px;
+  width: 100%;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  outline: none;
+  font-family: var(--font);
+}
+
+.rm-textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.1);
+}
+
+.rm-textarea--error {
+  border-color: var(--color-danger-border) !important;
+  background: var(--color-danger-bg);
+}
+
+.rm-textarea--error:focus {
+  border-color: var(--color-danger) !important;
+  box-shadow: 0 0 0 3px var(--color-danger-ring) !important;
+}
+
+.rm-textarea-footer {
+  display: flex;
+  justify-content: flex-end;
+  min-height: 1.1rem;
+}
+
+.rm-char-hint {
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+}
+
+/* Submit button */
+.rm-submit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  margin-top: 0.25rem;
+  transition:
+    background var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition),
+    opacity var(--transition);
+}
+
+.rm-submit:not(:disabled):hover {
+  box-shadow: 0 4px 16px rgba(26, 86, 219, 0.3);
+  transform: translateY(-1px);
+}
+
+.rm-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Loading spinner */
+.rm-spinner {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: rm-spin 0.75s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes rm-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Success state ────────────────────────────────────────────── */
+.rm-success {
+  padding: 1rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.rm-success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.1);
+  border: 2px solid rgba(16, 185, 129, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-success);
+  margin-bottom: 0.25rem;
+}
+
+.rm-success h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.rm-success p {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  max-width: 260px;
+  line-height: 1.5;
+}
+
+/* ── Reviews section ──────────────────────────────────────────── */
+.rm-reviews-section {
+  padding: 0 1.5rem;
+}
+
+.rm-reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* Empty state */
+.rm-empty {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.rm-empty p {
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+/* ── Review card ──────────────────────────────────────────────── */
+.rm-review {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.1rem;
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.rm-review:hover {
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.rm-review__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+}
+
+.rm-review__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+}
+
+.rm-review__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.rm-review__name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1;
+}
+
+.rm-review__rating-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.rm-review__date {
+  font-size: 0.73rem;
+  color: var(--color-text-light);
+}
+
+.rm-review__text {
+  font-size: 0.87rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .rm-modal {
+    max-height: 96vh;
+    border-radius: var(--radius-lg);
+  }
+
+  .rm-avg-number {
+    font-size: 2.4rem;
+  }
+
+  .rm-resource-thumb {
+    width: 60px;
+    height: 46px;
+  }
+}

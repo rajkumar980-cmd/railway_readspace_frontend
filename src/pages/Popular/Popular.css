@@ -1,0 +1,59 @@
+/* Popular Page */
+.page-hero--fire { background: linear-gradient(135deg, #b45309, #f59e0b); }
+
+.popular__spotlight { padding: 2.5rem 0; }
+
+.popular__podium {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.popular__podium-item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.popular__podium-item:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.popular__podium-item--1 { border-top: 3px solid #f59e0b; }
+.popular__podium-item--2 { border-top: 3px solid #94a3b8; }
+.popular__podium-item--3 { border-top: 3px solid #b45309; }
+
+.popular__rank { display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem; }
+
+.popular__podium-img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+.popular__podium-item h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.popular__podium-downloads { font-size: 0.82rem; color: var(--color-text-muted); }
+
+.popular__podium-actions { display: flex; gap: 0.5rem; width: 100%; }
+.popular__podium-actions .btn { flex: 1; }
+
+.popular__all { padding: 0.5rem 0 4rem; }
+.popular__all .section-title { margin-bottom: 1.5rem; }
+
+@media (max-width: 640px) {
+  .popular__podium { grid-template-columns: 1fr; }
+}

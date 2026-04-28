@@ -1,0 +1,30 @@
+/* ===== PageFade — Route-entry animation ===== */
+
+/*
+  CSS keyframe-driven mount animation.
+  GPU-only properties: opacity + transform.
+  Reduced-motion: renders static (no animation block).
+*/
+
+@media (prefers-reduced-motion: no-preference) {
+  .page-fade {
+    animation: page-enter 480ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+
+  @keyframes page-enter {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Ensure the wrapper doesn't interfere with layout */
+.page-fade {
+  /* Isolate stacking context to avoid z-index bleed */
+  isolation: isolate;
+}

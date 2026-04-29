@@ -64,7 +64,9 @@ export default function ResourceCard({ resource, onPreview, onFeedback }) {
   };
 
   const color = CATEGORY_COLORS[resource.category] || '#1a56db';
-  const stars = '★'.repeat(Math.round(resource.rating)) + '☆'.repeat(5 - Math.round(resource.rating));
+ const rating = resource.rating ?? 0;
+const stars = '★'.repeat(Math.round(rating)) + 
+              '☆'.repeat(5 - Math.round(rating));
 
   return (
     <>
@@ -97,8 +99,9 @@ export default function ResourceCard({ resource, onPreview, onFeedback }) {
           </span>
           <span className="resource-card__meta-item"><FileText size={12} aria-hidden="true" /> {resource.pages}pp</span>
           <span className="resource-card__meta-item"><Calendar size={12} aria-hidden="true" /> {resource.year}</span>
-          <span className="resource-card__meta-item"><Download size={12} aria-hidden="true" /> {resource.downloads.toLocaleString()}</span>
-          <span className="resource-card__meta-item">{resource.fileSize}</span>
+<span className="resource-card__meta-item">
+  <Download size={12} aria-hidden="true" /> {(resource.downloads ?? 0).toLocaleString()}
+</span>          <span className="resource-card__meta-item">{resource.fileSize}</span>
         </div>
       </div>
 

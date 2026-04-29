@@ -16,7 +16,7 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     if (!email || !password) return { success: false, error: 'All fields are required' };
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/login', { email, password });
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, { email, password });
       
       const data = response.data;
       if (data.success) {
@@ -37,7 +37,7 @@ export function AuthProvider({ children }) {
   const signup = async (name, email, password) => {
     if (!name || !email || !password) return { success: false, error: 'All fields are required' };
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/signup', { name, email, password });
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/signup`, { name, email, password });
       
       const data = response.data;
       if (data.success) {

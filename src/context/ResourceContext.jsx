@@ -10,7 +10,7 @@ export function ResourceProvider({ children }) {
   const fetchResources = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:8080/api/resources');
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/resources`);
       setResources(response.data);
     } catch (err) {
       console.error("Failed to fetch resources with Axios", err);

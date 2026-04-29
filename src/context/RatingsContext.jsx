@@ -54,7 +54,7 @@ export function RatingsProvider({ children }) {
   /* Fetch reviews when needed or on init */
   const fetchReviews = useCallback(async (resourceId) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/reviews/resource/${resourceId}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/reviews/resource/${resourceId}`);
       if (response.ok) {
         const data = await response.json();
         setReviewsByResource(prev => ({ ...prev, [resourceId]: data }));
@@ -67,7 +67,7 @@ export function RatingsProvider({ children }) {
   /* Add a new review for a resource */
   const addReview = useCallback(async (resourceId, review) => {
     try {
-      const response = await fetch('http://localhost:8080/api/reviews', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/reviews`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

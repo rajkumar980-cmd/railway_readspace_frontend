@@ -142,7 +142,7 @@ export default function AdminDashboard() {
 
   const fetchStats = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/admin/stats', {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin/stats`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       setSummaryStats(response.data);
@@ -157,7 +157,7 @@ export default function AdminDashboard() {
   const fetchReviews = async () => {
     setReviewsLoading(true);
     try {
-      const response = await axios.get('http://localhost:8080/api/reviews', {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/reviews`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       console.log("DEBUG: Fetched reviews successfully", response.data);
@@ -172,7 +172,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     if (activeSection === 'users') {
-      fetch('http://localhost:8080/api/users', {
+      fetch(`${import.meta.env.VITE_API_URL}/api/users`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       .then(res => res.json())
@@ -270,7 +270,7 @@ export default function AdminDashboard() {
     const newStatus = res.featured ? false : true; // Toggle featured status
     
     try {
-      const response = await fetch(`http://localhost:8080/api/resources/${id}/status`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/resources/${id}/status`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',
@@ -291,7 +291,7 @@ export default function AdminDashboard() {
   const handleConfirmDelete = async () => {
     if (!confirmDelete) return;
     try {
-      const response = await fetch(`http://localhost:8080/api/resources/${confirmDelete.id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/resources/${confirmDelete.id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -311,7 +311,7 @@ export default function AdminDashboard() {
 
   const handleSaveEdit = async (updated) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/resources/${updated.id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/resources/${updated.id}`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',
@@ -345,7 +345,7 @@ export default function AdminDashboard() {
     const newStatus = u.status === 'active' ? 'inactive' : 'active';
     
     try {
-      const response = await fetch(`http://localhost:8080/api/users/${id}/status`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${id}/status`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',
@@ -368,7 +368,7 @@ export default function AdminDashboard() {
     if (!u) return;
 
     try {
-      const response = await fetch(`http://localhost:8080/api/users/${id}/role`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${id}/role`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',
@@ -468,7 +468,7 @@ export default function AdminDashboard() {
         formData.append('file', selectedFile);
       }
 
-      const response = await fetch('http://localhost:8080/api/resources', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/resources`, {
         method: 'POST',
         headers: {
           'Authorization': token ? `Bearer ${token}` : ''
@@ -1194,7 +1194,7 @@ export default function AdminDashboard() {
 
           const handleDeleteReview = async (reviewId, reviewerName) => {
             try {
-              const response = await axios.delete(`http://localhost:8080/api/reviews/${reviewId}`, {
+              const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/reviews/${reviewId}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
               });
               fetchReviews();

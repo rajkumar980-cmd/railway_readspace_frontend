@@ -21,7 +21,7 @@ export default function ResourceCard({ resource, onPreview, onFeedback }) {
   const handleViewResource = () => {
     if (resource.filePath && resource.fileUrl) {
       const filename = resource.fileUrl.split('/').pop();
-      const url = `http://localhost:8080/api/resources/view/${filename}`;
+      const url = `${import.meta.env.VITE_API_URL}/api/resources/view/${filename}`;
       window.open(url, '_blank');
     } else if (resource.externalUrl) {
       window.open(resource.externalUrl, '_blank');
@@ -42,13 +42,13 @@ export default function ResourceCard({ resource, onPreview, onFeedback }) {
     
     if (!viewUrl && resource.fileUrl && resource.fileUrl.startsWith('/uploads')) {
       const filename = resource.fileUrl.split('/').pop();
-      viewUrl = `http://localhost:8080/api/resources/view/${filename}`;
+      viewUrl = `${import.meta.env.VITE_API_URL}/api/resources/view/${filename}`;
     }
 
     if (viewUrl) {
       // Fire-and-forget: Tell the backend to increment download count
       const token = localStorage.getItem('token');
-      fetch(`http://localhost:8080/api/resources/${resource.id}/download`, {
+      fetch(`${import.meta.env.VITE_API_URL}/api/resources/${resource.id}/download`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` }
       }).catch(err => console.error('Failed to record download:', err));
